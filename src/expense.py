@@ -10,7 +10,6 @@ def add_expense():
    expenses.append(expense)
   
 def view_expenses():
-    print("Viewing expenses...")
     if not expenses:
        print("=======No expense found======") 
     else:
@@ -20,14 +19,20 @@ def view_expenses():
       print(f'{i}.{ expense["title"]}  Rs.{expense["amount"]}')
 def delete_expense():
     view_expenses()
+    if not expenses:
+       print("=======Nothing to Delete======") 
+    else:
+     ch='y'
+     while ch.lower()=="y":   
+      expense_to_delete = int(input("Enter the expense number you want to delete: "))
 
-    expense_to_delete = int(input("Enter the expense number you want to delete: "))
+      j = expense_to_delete - 1
 
-    j = expense_to_delete - 1
-
-    if 0 <= j < len(expenses):
+      if 0 <= j < len(expenses):
         expenses.pop(j)
         print("Expense deleted successfully!")
-    else:
-        print("Expense doesn't exist")
+        view_expenses()
+        break
+      else:
+        ch=input("Invalid expense number. Do you want to try again? (y/n):")
 
