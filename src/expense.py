@@ -1,14 +1,16 @@
+import save
 expenses=[]
 def add_expense():
    title= input("Enter title:")
    amount=float(input("Enter amount:"))
-   print("Adding expense...")
    expense = {
       "title":title,
       "amount":amount
 }
    expenses.append(expense)
-  
+   print("Expense added succesfully")
+   save.save_expenses(expenses)
+   view_expenses()
 def view_expenses():
     if not expenses:
        print("=======No expense found======") 
@@ -16,7 +18,7 @@ def view_expenses():
      i=0    
      for expense in expenses:
       i+=1
-      print(f'{i}.{ expense["title"]}  Rs.{expense["amount"]}')
+      print(f'{i}.{ expense["title"]}  Rs.{expense["amount"]:.2f}')
 def delete_expense():
     view_expenses()
     if not expenses:
@@ -30,6 +32,7 @@ def delete_expense():
 
       if 0 <= j < len(expenses):
         expenses.pop(j)
+        save.save_expenses(expenses)
         print("Expense deleted successfully!")
         view_expenses()
         break
