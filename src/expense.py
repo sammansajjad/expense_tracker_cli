@@ -19,5 +19,15 @@ def view_expenses():
       i+=1
       print(f'{i}.{ expense["title"]}  Rs.{expense["amount"]}')
 def delete_expense():
-    print("Deleting expense...")
+    view_expenses()
+
+    expense_to_delete = int(input("Enter the expense number you want to delete: "))
+
+    j = expense_to_delete - 1
+
+    if 0 <= j < len(expenses):
+        expenses.pop(j)
+        print("Expense deleted successfully!")
+    else:
+        print("Expense doesn't exist")
 
